@@ -15,6 +15,7 @@ function HomePage() {
                 flex: 1
             }}>
                 <Menu />
+                <Banner imgUrl={"/img/banner.jpg"} />
                 <Header />
                 <Timeline playlists={config.playlists}>
                     Conteudo
@@ -52,8 +53,6 @@ function Timeline(props) {
                         </div>
                     </section>
                 )
-
-                return 
             })}
 
         </StyledTimeline>
@@ -91,5 +90,20 @@ function Header() {
                 </div>
             </section>
         </StyledHeader>
+    )
+}
+
+const StyledBanner = styled.div`
+    height: 360px;
+    width: 100%;
+    border: 1px solid #eee;
+    background-size: cover;
+    background-image: url(${(props) => props.imgUrl});
+`
+
+function Banner(props) {
+    return (
+        <StyledBanner imgUrl={props.imgUrl}>
+        </StyledBanner>
     )
 }
