@@ -20,6 +20,8 @@ function HomePage() {
                 <Timeline playlists={config.playlists}>
                     Conteudo
                 </Timeline>
+
+                <FavoriteChannels channels={config.favorites} />
             </div>
         </>
         
@@ -105,5 +107,46 @@ function Banner(props) {
     return (
         <StyledBanner imgUrl={props.imgUrl}>
         </StyledBanner>
+    )
+}
+
+const StyledFavoriteChannels = styled.section`
+    padding: 30px;
+    .channels {
+        margin-top: 25px;
+        gap: 30px;
+        display: flex;
+
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .channel {
+            span {
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+`
+
+function FavoriteChannels(props) {
+    return (
+        <StyledFavoriteChannels>
+            <h2>AluraTube Favoritos</h2>
+            <div className="channels">
+                { props.channels.map((channel) => {
+                    return (
+                        <div className="channel">
+                            <img src={channel.img}></img>
+                            <span>{channel.name}</span>
+                        </div>
+                    )
+                }) }
+                
+            </div>
+        </StyledFavoriteChannels>
     )
 }

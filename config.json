@@ -2,6 +2,16 @@
     "name": "Vinicius Aquino",
     "job": "Fullstack Developer",
     "github": "viniciussvl",
+    "favorites": [
+        {
+            "name": "@JavaScript",
+            "img": "https://img.youtube.com/vi/QsqatJxAUtk/hqdefault.jpg"
+        },
+        {
+            "name": "@PHP",
+            "img": "https://img.youtube.com/vi/QsqatJxAUtk/hqdefault.jpg"
+        }
+    ],
     "playlists": {
         "jogos": [
             {
