@@ -3,8 +3,10 @@ import styled from 'styled-components'
 import { CSSReset } from '../src/components/CSSReset';
 import Menu from '../src/components/Menu';
 import { StyledTimeline } from '../src/components/Timeline';
+import React from 'react';
 
 function HomePage() {
+    const [valorDoFiltro, setValorDoFiltro] = React.useState("angular");
 
     return (
         <>
@@ -14,10 +16,10 @@ function HomePage() {
                 flexDirection: "column",
                 flex: 1
             }}>
-                <Menu />
+                <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro} />
                 <Banner imgUrl={"/img/banner.jpg"} />
                 <Header />
-                <Timeline playlists={config.playlists}>
+                <Timeline searchValue={valorDoFiltro} playlists={config.playlists}>
                     Conteudo
                 </Timeline>
 
@@ -30,7 +32,7 @@ function HomePage() {
 
 export default HomePage;
 
-function Timeline(props) {
+function Timeline({ searchValue, ...props }) {
     const playlistNames = Object.keys(props.playlists)
 
     return (
@@ -39,18 +41,23 @@ function Timeline(props) {
                 const videos = props.playlists[playlistName];
                 
                 return (
-                    <section>
+                    <section key={playlistName}>
                         <h2>{playlistName}</h2>
                         <div>
-                            { videos.map((video) => {
-                                return (
-                                    <a href={video.url}>
-                                        <img src={video.thumb}></img>
-                                        <span>
-                                            {video.title}
-                                        </span>
-                                    </a>
-                                )
+                            { videos.filter((video) => { 
+                                const titleNormalized = video.title.toLowerCase();
+                                const searchValueNormalized = searchValue.toLowerCase();
+
+                                return titleNormalized.includes(searchValueNormalized) 
+                            }).map((video) => {
+                                    return (
+                                        <a key={video.url} href={video.url}>
+                                            <img src={video.thumb}></img>
+                                            <span>
+                                                {video.title}
+                                            </span>
+                                        </a>
+                                    )
                             })}
                         </div>
                     </section>
@@ -139,7 +146,7 @@ function FavoriteChannels(props) {
             <div className="channels">
                 { props.channels.map((channel) => {
                     return (
-                        <div className="channel">
+                        <div key={channel.name} className="channel">
                             <img src={channel.img}></img>
                             <span>{channel.name}</span>
                         </div>
