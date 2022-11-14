@@ -6,7 +6,7 @@ import { StyledTimeline } from '../src/components/Timeline';
 import React from 'react';
 
 function HomePage() {
-    const [valorDoFiltro, setValorDoFiltro] = React.useState("angular");
+    const [valorDoFiltro, setValorDoFiltro] = React.useState("");
 
     return (
         <>
@@ -69,6 +69,9 @@ function Timeline({ searchValue, ...props }) {
 }
 
 const StyledHeader = styled.div`
+    background-color: ${({ theme }) => theme.backgroundLevel1 };
+    color: ${({ theme }) => theme.textColorBase };
+
     img {
         width: 80px;
         height: 80px;
@@ -105,7 +108,7 @@ function Header() {
 const StyledBanner = styled.div`
     height: 360px;
     width: 100%;
-    border: 1px solid #eee;
+    border: 1px solid ${({theme}) => theme.backgroundLevel2};
     background-size: cover;
     background-image: url(${(props) => props.imgUrl});
 `
